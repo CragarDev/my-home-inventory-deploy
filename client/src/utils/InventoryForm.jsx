@@ -99,7 +99,7 @@ const InventoryForm = props => {
     //   inventoryImage
     // }
     axios
-      .post('http://Localhost:8000/api/inventory/new', formData)
+      .post('http://localhost:8000/api/inventory/new', formData)
       .then(res => {
         console.log('INVENTORY FORM RESPONSE', res)
 
@@ -177,7 +177,7 @@ const InventoryForm = props => {
   // get list of categories from the database
   useEffect(() => {
     axios
-      .get('http://Localhost:8000/api/category')
+      .get('http://localhost:8000/api/category')
       .then(res => {
         console.log('CATEGORY LIST', res.data.results)
         setCategoryList(res.data.results)

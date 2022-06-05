@@ -44,7 +44,7 @@ const ItemUpdate = props => {
   useEffect(() => {
     // console.log('ITEM UPDATE:_id===>', _id)
     axios
-      .get(`http://Localhost:8000/api/inventory/getOne/${_id}`)
+      .get(`http://localhost:8000/api/inventory/getOne/${_id}`)
       .then(res => {
         console.log('UPDATE INVENTORY- get item - RESPONSE', res)
         setCategory(res.data.results.category)
@@ -122,7 +122,7 @@ const ItemUpdate = props => {
   // get list of categories from the database
   useEffect(() => {
     axios
-      .get('http://Localhost:8000/api/category')
+      .get('http://localhost:8000/api/category')
       .then(res => {
         console.log('CATEGORY LIST', res.data.results)
         setCategoryList(res.data.results)
@@ -164,7 +164,7 @@ const ItemUpdate = props => {
     formData.append('purchaseLocation', inventoryItemToUpdate.purchaseLocation)
 
     axios
-      .put(`http://Localhost:8000/api/inventory/update/${_id}`, formData)
+      .put(`http://localhost:8000/api/inventory/update/${_id}`, formData)
       .then(res => {
         // console.log('UPDATE INVENTORY- res:', res)
         console.log('UPDATE INVENTORY- res.data:', res.data)

@@ -73,7 +73,7 @@ const Register = props => {
 
     // use axios to post the author
     axios
-      .post('http://Localhost:8000/api/user/register', newUser, {
+      .post('http://localhost:8000/api/user/register', newUser, {
         withCredentials: true
       })
       .then(res => {

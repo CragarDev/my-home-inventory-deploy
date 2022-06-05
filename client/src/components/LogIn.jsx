@@ -39,7 +39,7 @@ export default function LogIn (props) {
     }
 
     axios
-      .post('http://Localhost:8000/api/user/login', formInfo, {
+      .post('http://localhost:8000/api/user/login', formInfo, {
         withCredentials: true
       })
       .then(res => {

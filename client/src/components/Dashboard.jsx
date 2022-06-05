@@ -24,7 +24,7 @@ const Dashboard = props => {
     // console.log('Dashboard')
 
     axios
-      .get('http://Localhost:8000/api/user/loggedInUser', {
+      .get('http://localhost:8000/api/user/loggedInUser', {
         withCredentials: true
       })
       .then(res => {
