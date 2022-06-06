@@ -14,7 +14,7 @@ const TestProject = () => {
             This is a test Project
           </Typography>
           <Typography align='center' variant='h5'>
-            The database will be dropped every few of days!
+            The database will be dropped every few days!
           </Typography>
           <Typography align='center' variant='h5'>
             Thank you for trying it out!
