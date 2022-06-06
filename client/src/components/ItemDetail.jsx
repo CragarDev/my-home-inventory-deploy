@@ -10,8 +10,7 @@ import {
   Grid,
   Container,
   ButtonGroup,
-  Button,
-  Box
+  Button
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
@@ -22,20 +21,7 @@ const ItemDetail = props => {
   const [inventoryItem, setInventoryItem] = useState({})
   const { deleteToggle, setDeleteToggle } = props
   // destructure the inventory item
-  const {
-    title,
-    category,
-    location,
-    make,
-    model,
-    serialNumber,
-    inventoryImage,
-    description,
-    purchasePrice,
-    currentValue,
-    purchaseLocation,
-    user_id
-  } = inventoryItem
+  const { title, inventoryImage } = inventoryItem
   const history = useHistory()
   // const [deleteToggle, setDeleteToggle] = useState(false)
 
@@ -67,12 +53,12 @@ const ItemDetail = props => {
       })
   }, [_id])
 
-  // number formatter for price
-  const priceFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-  })
+  // // number formatter for price
+  // const priceFormatter = new Intl.NumberFormat('en-US', {
+  //   style: 'currency',
+  //   currency: 'USD',
+  //   minimumFractionDigits: 2
+  // })
 
   return (
     <>

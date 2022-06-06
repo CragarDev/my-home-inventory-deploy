@@ -11,13 +11,14 @@ import {
 import ItemCard from './ItemCard'
 
 const AllInventoryItems = props => {
+  console.log('Entering AllInventoryItems')
   // state varible to hold the inventory items
   const [inventoryItems, setInventoryItems] = useState([])
 
   // logged in user id
   const { loggedInUserId } = props
-  // console.log('ALLINVENTORYITEMS__props', props)
-  // console.log('ALLINVENTORYITEMS__Logged in user id: ', loggedInUserId)
+  console.log('ALLINVENTORYITEMS__props', props)
+  console.log('ALLINVENTORYITEMS__Logged in user id: ', loggedInUserId)
 
   // history object to redirect to the edit page
   const history = useHistory()

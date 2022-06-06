@@ -5,19 +5,16 @@ import { Container } from '@mui/material'
 const DetailsInfo = props => {
   // destructuring the props
   const {
-    _id,
     category,
-    title,
     location,
     make,
     model,
     serialNumber,
     description,
+    condition,
     purchasePrice,
     currentValue,
-    purchaseLocation,
-    inventoryImage,
-    user_id
+    purchaseLocation
   } = props.inventoryItem
   return (
     <>
@@ -77,6 +74,15 @@ const DetailsInfo = props => {
               </th>
               <td className='text-start h4 mb-5'>
                 <span className='text-warning h5'>{description}</span>
+              </td>
+            </tr>
+            {/* Condition */}
+            <tr>
+              <th className='text-end pe-3' scope='col'>
+                Condition:{' '}
+              </th>
+              <td className='text-start h4 mb-5'>
+                <span className='text-warning h5'>{condition}</span>
               </td>
             </tr>
             {/* Purchase Price */}

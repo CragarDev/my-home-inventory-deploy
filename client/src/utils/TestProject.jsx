@@ -22,7 +22,7 @@ const TestProject = () => {
         </Paper>
         <Typography variant='caption' align='center'>
           Images available at{' '}
-          <a href='https://www.pexels.com/' target='_blank'>
+          <a href='https://www.pexels.com/' target='_blank' rel='noreferrer'>
             https://www.pexels.com/
           </a>
         </Typography>
