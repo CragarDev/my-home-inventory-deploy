@@ -23,6 +23,9 @@ module.exports.createInventoryItem = async (req, res) => {
     const file = req.files[0];
     const result = await s3Uploadv2(file);
     req.body.inventoryImage = result.Location;
+    console.log("CONTROLLER-createInventoryItem-result.Location==> ", result.Location);
+    req.body.inventoryImageKey = result.Key;
+    console.log("CONTROLLER-createInventoryItem-result.Key==> ", result.Key);
     Inventory.create(req.body) // req.file
       .then((newlyCreatedInventoryItem) => res.json({ message: "CREATING new inventory item was successful", results: newlyCreatedInventoryItem }))
       .catch((err) => res.json({ message: "CREATING Inventory Item: Something went wrong", error: err }));

@@ -55,6 +55,9 @@ const inventorySchema = new mongoose.Schema(
     inventoryImage: {
       type: String
     },
+    inventoryImageKey: {
+      type: String
+    },
     user_id: {
       type: String
     }
