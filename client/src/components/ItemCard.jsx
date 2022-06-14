@@ -21,8 +21,6 @@ const ItemCard = props => {
             <CardMedia
               component='img'
               height='150px'
-              // src={`inventoryImages/${inventoryImage}`}
-              // src={require(`${inventoryImage}`)}
               src={inventoryImage}
               alt={title}
             />

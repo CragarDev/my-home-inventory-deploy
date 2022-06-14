@@ -58,6 +58,7 @@ const ItemUpdate = props => {
       })
   }, [_id])
 
+  // function to add a new category to the category list
   const addNewCategoryToCurrentCategory = event => {
     // console.log('addNewCategoryToCurrentCategory', event)
     // console.log('catToAdd after entering new category button', catToAdd)
@@ -80,7 +81,7 @@ const ItemUpdate = props => {
 
     // console.log('addNewCat', addNewCat)
     // console.log('addNewCat.categoryName', addNewCat.categoryName)
-
+    
     axios
       .post('http://localhost:8000/api/category/new', addNewCat)
       .then(res => {

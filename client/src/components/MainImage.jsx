@@ -12,7 +12,7 @@ const MainImage = props => {
           height='100%'
           width='100%'
           //   image={`inventoryImages/${inventoryImage}`}
-          image={`../inventoryImages/${inventoryImage}`}
+          image={inventoryImage}
           alt={title}
         />
       </Card>

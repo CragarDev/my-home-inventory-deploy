@@ -47,7 +47,7 @@ module.exports = (app) => {
   app.post("/api/inventory/new", upload.array("inventoryImage"), InventoryControllers.createInventoryItem);
   // updating an inventory item by id
   // console.log("ROUTES__app.put---->");
-  app.put("/api/inventory/update/:_id", upload.single("inventoryImage"), InventoryControllers.updateExistingInventoryItem);
+  app.put("/api/inventory/update/:_id", upload.array("inventoryImage"), InventoryControllers.updateExistingInventoryItem);
   // get one inventory item by id
   app.get("/api/inventory/getOne/:_id", InventoryControllers.getOneInventoryItem);
   // deleting a inventory item by id

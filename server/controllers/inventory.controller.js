@@ -42,7 +42,7 @@ module.exports.createInventoryItem = async (req, res) => {
   // then pass the newInventoryItem to the Inventory.create(newInventoryItem) method, like so
 
   Inventory.create(req.body) // req.file
-    .then((newlyCreatedInventoryItem) => res.json({ results: newlyCreatedInventoryItem }))
+    .then((newlyCreatedInventoryItem) => res.json({ message: "CREATING new inventory item was successful", results: newlyCreatedInventoryItem }))
     .catch((err) => res.json({ message: "CREATING Inventory Item: Something went wrong", error: err }));
 };
 
@@ -112,17 +112,37 @@ module.exports.getOneInventoryItem = (req, res) => {
 //n- :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //
 // update a Inventory
-module.exports.updateExistingInventoryItem = (req, res) => {
+module.exports.updateExistingInventoryItem = async (req, res) => {
+  console.log("CONTROLLER--req.body==> ", req.body);
+  console.log("CONTROLLER--req.files==> ", req.files);
+  console.log("CONTROLLER--req.files[0]==> ", req.files[0]);
+  console.log("CONTROLLER--req.files[0].size==> ", req.files[0].size);
+  // let file;
+  // let result;
+  if (req.files[0].length > 0) {
+    const file = req.files[0];
+    const result = await s3Uploadv2(file);
+    req.body.inventoryImage = result.Location;
+    Inventory.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true, runValidators: true })
+      .then((updatedInventory) => res.json({ message: "UPDATING Inventory item was Successful", results: updatedInventory }))
+      .catch((err) => res.json({ message: "UPDATING Inventory: Something went wrong", error: err }));
+  } else {
+    req.body.inventoryImage = req.body.inventoryImage;
+    Inventory.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true, runValidators: true })
+      .then((updatedInventory) => res.json({ message: "UPDATING Inventory item was Successful", results: updatedInventory }))
+      .catch((err) => res.json({ message: "UPDATING Inventory: Something went wrong", error: err }));
+  }
+
   // console.log("UPDATE ONE Using Params: ", req.params);
   // console.log("UPDATE ONE Using Params._id: ", req.params._id);
   // console.log("updateExistingInventoryItem__::::::::::: Passed through updateExistingInventoryItem :::::::::::::");
   // console.log("CONTROLLER-updateExistingInventoryItem-req.body==> ", req.body);
-  req.file ? (req.body.inventoryImage = req.file.filename) : (req.body.inventoryImage = req.body.inventoryImage);
+  // req.file ? (req.body.inventoryImage = result.Location) : (req.body.inventoryImage = req.body.inventoryImage);
   // console.log("CONTROLLER-updateExistingInventoryItem-req.body.inventoryImage==> ", req.body.inventoryImage);
 
-  Inventory.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true, runValidators: true })
-    .then((updatedInventory) => res.json({ message: "UPDATING Inventory: Successful", results: updatedInventory }))
-    .catch((err) => res.json({ message: "UPDATING Inventory: Something went wrong", error: err }));
+  // Inventory.findOneAndUpdate({ _id: req.params._id }, req.body, { new: true, runValidators: true })
+  //   .then((updatedInventory) => res.json({ message: "UPDATING Inventory item was Successful", results: updatedInventory }))
+  //   .catch((err) => res.json({ message: "UPDATING Inventory: Something went wrong", error: err }));
 };
 
 //
