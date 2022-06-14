@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import ItemsList from './ItemsList'
-import { Container, Typography } from '@mui/material'
+import { Container, Typography, Box } from '@mui/material'
 
 const Dashboard = props => {
   const [loggedInUserId, setLoggedInUserId] = useState('')
@@ -64,18 +64,32 @@ const Dashboard = props => {
         }}
       >
         <Container>
-          <Typography
-            sx={{ marginTop: '200px', height: '100px', paddingTop: '15px' }}
-            variant='h3'
-            className='text-center text-dark'
+          <Box
             bgcolor={'warning.main'}
+            sx={{ marginTop: '200px', height: '150px', paddingTop: '15px' }}
           >
-            Welcome{' '}
-            <span className='text-success fw-bold h1'>
-              {loggedInUserFirstName}
-            </span>
-            , to My Home Inventory
-          </Typography>
+            <Typography
+              // sx={{ marginTop: '200px', height: '100px', paddingTop: '15px' }}
+              variant='h2'
+              className='text-center fw-bold h1'
+              color='success.dark'
+              // bgcolor={'warning.main'}
+            >
+              My Home Inventory{' '}
+            </Typography>
+            <Typography
+              // sx={{ marginTop: '200px', height: '100px', paddingTop: '15px' }}
+              variant='h3'
+              className='text-center text-dark'
+              // bgcolor={'warning.main'}
+            >
+              Welcome{' '}
+              <span className='text-success fw-bold'>
+                {loggedInUserFirstName}
+              </span>
+              , to your dashboard...
+            </Typography>
+          </Box>
           {/* <ItemsList /> */}
           {/* <Category /> */}
           <ItemsList
