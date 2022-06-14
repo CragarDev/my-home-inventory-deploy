@@ -19,20 +19,30 @@ module.exports.sayHello = (req, res) => {
 //
 // create a new Inventory Item
 module.exports.createInventoryItem = async (req, res) => {
-  const file = req.files[0];
-  console.log("::::::::::: Passed through createInventoryItem :::::::::::::");
-  console.log("CONTROLLER-createInventoryItem-req.body==> ", req.body);
-  console.log("CONTROLLER-createInventoryItem-req.file==> ", req.files);
-  const result = await s3Uploadv2(file);
-  console.log("CONTROLLER-createInventoryItem-result==> ", result);
+  if (req.files[0]) {
+    const file = req.files[0];
+    const result = await s3Uploadv2(file);
+    req.body.inventoryImage = result.Location;
+    Inventory.create(req.body) // req.file
+      .then((newlyCreatedInventoryItem) => res.json({ message: "CREATING new inventory item was successful", results: newlyCreatedInventoryItem }))
+      .catch((err) => res.json({ message: "CREATING Inventory Item: Something went wrong", error: err }));
+  } else {
+    Inventory.create(req.body) // req.file
+      .then((newlyCreatedInventoryItem) => res.json({ message: "CREATING new inventory item was successful", results: newlyCreatedInventoryItem }))
+      .catch((err) => res.json({ message: "CREATING Inventory Item: Something went wrong", error: err }));
+  }
+
+  // console.log("::::::::::: Passed through createInventoryItem :::::::::::::");
+  // console.log("CONTROLLER-createInventoryItem-req.body==> ", req.body);
+  // console.log("CONTROLLER-createInventoryItem-req.file==> ", req.files);
+  // console.log("CONTROLLER-createInventoryItem-result==> ", result);
   // console.log("createInventoryItem__::::::::::: Passed through createInventoryItem :::::::::::::");
   // console.log("CONTROLLER--req.body==> ", req.body);
   // console.log("CONTROLLER--req.file==> ", req.file);
-  console.log("CONTROLLER--result.filename==> ", result.Location);
+  // console.log("CONTROLLER--result.filename==> ", result.Location);
 
   // add the file.filename to the req.body
-  req.body.inventoryImage = result.Location;
-  console.log("CONTROLLER--req.body.inventoryImage==> ", req.body.inventoryImage);
+  // console.log("CONTROLLER--req.body.inventoryImage==> ", req.body.inventoryImage);
 
   // another way of doing this is to build a new object and add the file.filename to it
   // let newInventoryItem = {
@@ -41,9 +51,9 @@ module.exports.createInventoryItem = async (req, res) => {
   //};
   // then pass the newInventoryItem to the Inventory.create(newInventoryItem) method, like so
 
-  Inventory.create(req.body) // req.file
-    .then((newlyCreatedInventoryItem) => res.json({ message: "CREATING new inventory item was successful", results: newlyCreatedInventoryItem }))
-    .catch((err) => res.json({ message: "CREATING Inventory Item: Something went wrong", error: err }));
+  // Inventory.create(req.body) // req.file
+  //   .then((newlyCreatedInventoryItem) => res.json({ message: "CREATING new inventory item was successful", results: newlyCreatedInventoryItem }))
+  //   .catch((err) => res.json({ message: "CREATING Inventory Item: Something went wrong", error: err }));
 };
 
 // get all Inventory Items no Sort
@@ -115,11 +125,12 @@ module.exports.getOneInventoryItem = (req, res) => {
 module.exports.updateExistingInventoryItem = async (req, res) => {
   console.log("CONTROLLER--req.body==> ", req.body);
   console.log("CONTROLLER--req.files==> ", req.files);
-  console.log("CONTROLLER--req.files[0]==> ", req.files[0]);
-  console.log("CONTROLLER--req.files[0].size==> ", req.files[0].size);
+  console.log("CONTROLLER--req.files[0]== true> ", req.files[0] === true);
+  console.log("CONTROLLER--req.files[0]== false> ", req.files[0] === false);
+  // console.log("CONTROLLER--req.files[0].size==> ", req.files[0].size);
   // let file;
   // let result;
-  if (req.files[0].length > 0) {
+  if (req.files[0]) {
     const file = req.files[0];
     const result = await s3Uploadv2(file);
     req.body.inventoryImage = result.Location;

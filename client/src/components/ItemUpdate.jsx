@@ -30,6 +30,7 @@ const ItemUpdate = props => {
   const [title, setTitle] = useState('')
   const [categoryList, setCategoryList] = useState([])
   const [newInventoryImage, setNewInventoryImage] = useState('')
+  const { updatedInventoryToggle, setUpdatedInventoryToggle } = props
 
   // create state variables for the form inputs
   const [inventoryItemToUpdate, setInventoryItemToUpdate] = useState({})
@@ -81,7 +82,7 @@ const ItemUpdate = props => {
 
     // console.log('addNewCat', addNewCat)
     // console.log('addNewCat.categoryName', addNewCat.categoryName)
-    
+
     axios
       .post('http://localhost:8000/api/category/new', addNewCat)
       .then(res => {
@@ -193,6 +194,8 @@ const ItemUpdate = props => {
           setNewInventoryImage('')
           // clear the errors
           setErrors({})
+          // set the updatedInventoryToggle to the opposite of what it is
+          setUpdatedInventoryToggle(!updatedInventoryToggle)
           // redirect to the inventory page
           history.push('/dashboard')
         }

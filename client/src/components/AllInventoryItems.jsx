@@ -16,7 +16,11 @@ const AllInventoryItems = props => {
   const [inventoryItems, setInventoryItems] = useState([])
 
   // logged in user id
-  const { loggedInUserId } = props
+  const {
+    loggedInUserId,
+    updatedInventoryToggle,
+    setUpdatedInventoryToggle
+  } = props
   console.log('ALLINVENTORYITEMS__props', props)
   console.log('ALLINVENTORYITEMS__Logged in user id: ', loggedInUserId)
 
@@ -38,7 +42,12 @@ const AllInventoryItems = props => {
       .catch(err => {
         console.log('ALL INVENTORY: error from server: ', err)
       })
-  }, [loggedInUserId, deleteToggle, props.newInventoryItemToggle])
+  }, [
+    loggedInUserId,
+    deleteToggle,
+    props.newInventoryItemToggle,
+    updatedInventoryToggle
+  ])
 
   // delete an item
   const deleteInventoryItem = _id => {

@@ -13,7 +13,12 @@ const Dashboard = props => {
 
   const [deleteToggle, setDeleteToggle] = useState(false)
 
-  const { loggedInUserToggle, setLoggedInUserToggle } = props
+  const {
+    loggedInUserToggle,
+    setLoggedInUserToggle,
+    updatedInventoryToggle,
+    setUpdatedInventoryToggle
+  } = props
 
   const [errors, setErrors] = useState({})
 
@@ -77,6 +82,8 @@ const Dashboard = props => {
             deleteToggle={deleteToggle}
             setDeleteToggle={setDeleteToggle}
             loggedInUserId={loggedInUserId}
+            updatedInventoryToggle={updatedInventoryToggle}
+            setUpdatedInventoryToggle={setUpdatedInventoryToggle}
           ></ItemsList>
         </Container>
       </div>

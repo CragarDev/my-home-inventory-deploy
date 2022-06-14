@@ -19,6 +19,7 @@ function App() {
   const [newUserToggle, setNewUserToggle] = useState(false);
   const [deleteToggle, setDeleteToggle] = useState(false);
   const [loggedInUserToggle, setLoggedInUserToggle] = useState(false);
+  const [updatedInventoryToggle, setUpdatedInventoryToggle] = useState(false);
 
   return (
     <>
@@ -38,7 +39,7 @@ function App() {
             <Register newUserToggle={newUserToggle} setNewUserToggle={setNewUserToggle} className="bgImgRegister" loggedInUserToggle={loggedInUserToggle} setLoggedInUserToggle={setLoggedInUserToggle} />
           </Route>
           <Route exact path="/dashboard">
-            <Dashboard loggedInUserToggle={loggedInUserToggle} setLoggedInUserToggle={setLoggedInUserToggle}>
+            <Dashboard loggedInUserToggle={loggedInUserToggle} setLoggedInUserToggle={setLoggedInUserToggle} updatedInventoryToggle={updatedInventoryToggle}>
               {/* <ItemsList deleteToggle={deleteToggle} setDeleteToggle={setDeleteToggle}>
                 <Category />
               </ItemsList> */}
@@ -51,7 +52,7 @@ function App() {
             <ItemDetail deleteToggle={deleteToggle} setDeleteToggle={setDeleteToggle} />
           </Route>
           <Route exact path="/itemUpdate/:_id">
-            <ItemUpdate />
+            <ItemUpdate updatedInventoryToggle={updatedInventoryToggle} setUpdatedInventoryToggle={setUpdatedInventoryToggle} />
           </Route>
           <Route path="*">
             <NoMatch />

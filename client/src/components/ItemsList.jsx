@@ -4,7 +4,12 @@ import { Container } from '@mui/material'
 
 const ItemsList = props => {
   const [newInventoryItemToggle, setNewInventoryItemToggle] = useState(false)
-  const { deleteToggle, setDeleteToggle } = props
+  const {
+    deleteToggle,
+    setDeleteToggle,
+    updatedInventoryToggle,
+    setUpdatedInventoryToggle
+  } = props
   const { loggedInUserId } = props
   // console.log('ITEMSLIST__Logged in user id: ', loggedInUserId)
   return (
@@ -18,6 +23,8 @@ const ItemsList = props => {
           deleteToggle={deleteToggle}
           setDeleteToggle={setDeleteToggle}
           loggedInUserId={loggedInUserId}
+          updatedInventoryToggle={updatedInventoryToggle}
+          setUpdatedInventoryToggle={setUpdatedInventoryToggle}
         />
       </Container>
     </>
