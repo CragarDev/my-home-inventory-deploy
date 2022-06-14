@@ -1,5 +1,6 @@
 // import the inventory model
 const Inventory = require("../models/inventory.model");
+const { s3Uploadv2 } = require("../helpers/s3Service.helper");
 
 console.log(":::::: INVENTORY CONTROLLER :::::::");
 
@@ -17,13 +18,21 @@ module.exports.sayHello = (req, res) => {
 //t- :::::::::::::::::::::::::::::::::::::::::::::::::::::::
 //
 // create a new Inventory Item
-module.exports.createInventoryItem = (req, res) => {
+module.exports.createInventoryItem = async (req, res) => {
+  const file = req.files[0];
+  console.log("::::::::::: Passed through createInventoryItem :::::::::::::");
+  console.log("CONTROLLER-createInventoryItem-req.body==> ", req.body);
+  console.log("CONTROLLER-createInventoryItem-req.file==> ", req.files);
+  const result = await s3Uploadv2(file);
+  console.log("CONTROLLER-createInventoryItem-result==> ", result);
   // console.log("createInventoryItem__::::::::::: Passed through createInventoryItem :::::::::::::");
   // console.log("CONTROLLER--req.body==> ", req.body);
   // console.log("CONTROLLER--req.file==> ", req.file);
-  // console.log("CONTROLLER--req.file.filename==> ", req.file.filename);
+  console.log("CONTROLLER--result.filename==> ", result.Location);
+
   // add the file.filename to the req.body
-  req.body.inventoryImage = req.file.filename;
+  req.body.inventoryImage = result.Location;
+  console.log("CONTROLLER--req.body.inventoryImage==> ", req.body.inventoryImage);
 
   // another way of doing this is to build a new object and add the file.filename to it
   // let newInventoryItem = {

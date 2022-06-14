@@ -1,22 +1,15 @@
 // import inventory controller
 const InventoryControllers = require("../controllers/inventory.controller");
 const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
-const path = require("path");
+// const { v4: uuidv4 } = require("uuid");
+// const path = require("path");
 
 console.log(":::::: INVENTORY ROUTES :::::::");
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "client/public/inventoryImages");
-  },
-  filename: function (req, file, cb) {
-    cb(null, uuidv4() + "==" + Date.now() + "==" + file.originalname);
-  }
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  const allowedFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+  const allowedFileTypes = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
   if (allowedFileTypes.includes(file.mimetype)) {
     console.log("file is an image");
     cb(null, true);
@@ -51,7 +44,7 @@ module.exports = (app) => {
   // getting one random inventory item
   // app.get("/api/inventory/random", InventoryControllers.getOneRandomInventory);
   // create new inventory item
-  app.post("/api/inventory/new", upload.single("inventoryImage"), InventoryControllers.createInventoryItem);
+  app.post("/api/inventory/new", upload.array("inventoryImage"), InventoryControllers.createInventoryItem);
   // updating an inventory item by id
   // console.log("ROUTES__app.put---->");
   app.put("/api/inventory/update/:_id", upload.single("inventoryImage"), InventoryControllers.updateExistingInventoryItem);
